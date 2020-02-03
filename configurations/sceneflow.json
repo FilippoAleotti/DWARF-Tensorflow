@@ -1,0 +1,70 @@
+{
+  "experiment": {
+    "factory":"sceneflow",
+    "network_name": "dwarf"
+  },
+
+  "network" : {
+    "max_displacement" : 4,
+    "max_depth_displacement":0,
+    "number_of_scales": 7, 
+    "number_of_sceneflows": 5, 
+    "alphas": [0, 0, 0.005, 0.01, 0.02, 0.08, 0.32],
+    "optical_flow_weight": 0.5, 
+    "scale_factor": 20, 
+    "use_dense_connections": true, 
+    "use_context": true,
+    "use_volumes_correlation": true, 
+    "color_disparity_factor": 2.5,
+    "max_output": 1,
+    "gamma": 0.0004,
+    "use_pyramidal_gt": true,
+    "final_resizing_method":"CROP"
+  },
+
+  "testing":
+  {
+    "checkpoint_paths": {
+      "pc": "checkpoints/sceneflow/model"
+    },
+
+    "selected_checkpoint": "pc",
+    
+    "dataloader" : {
+      "data_paths": {
+        "pc":"path-to-sceneflow-val-folder"
+      },
+
+      "selected_data_path": "pc",
+      "filenames": "filenames/test/sceneflow.txt"
+    },
+  
+    "filters":[
+      "filters.shaper.Shaper",
+      "filters.padder.Padder"],
+  
+    "filters_settings": {
+      "shaping_params": {
+        "channels": [3,3,3,3]
+      },
+
+      "padding_params":{
+        "height": 576,
+        "width": 960,
+        "excluded_indexes":[4,5,6],
+        "mode":"testing"
+      }
+    },
+
+    "writers": [],
+    "writing_settings":
+    {
+      "visual_writer":{
+        "output_dir": "./results",
+        "disparity_color_factor": 2},
+      "kitti_writer":{
+        "output_dir":"./results"
+      }
+    }
+  }
+}
