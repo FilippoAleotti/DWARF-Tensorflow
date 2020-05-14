@@ -22,6 +22,64 @@
     "final_resizing_method":"CROP"
   },
 
+  "training": {
+      "iterations": 1200000.0,
+      "epochs": -1,
+      "starting_step":0,
+      "saving_step": 5000, 
+
+      "checkpoint_paths": {
+        "prev_ckpt": "/previous/ckpt",
+      },
+
+      "selected_checkpoint": none,
+      
+      "dataloader":{
+        "data_paths": {
+          "flying3d": "/your/path/to/FlyingThings3D/train},
+
+        "selected_data_path": "flying3d",
+        "batch_size": 4, 
+        "filenames": "filenames/training/sceneflow.txt", 
+        "is_disparity_change_residual": true
+      },
+
+      "filters_settings": {
+        "zooming_params": {
+          "probability": 0.5, 
+          "flow_index": [6], 
+          "disp_indexis": [4,5], 
+          "channels": 2,
+          "method": "AREA"
+        }, 
+
+        "cropping_params": {
+          "final_dimensions": [3,3,3,3,1,1,2], 
+          "width":  768, 
+          "height": 384}, 
+        "coloring_params": {
+          "excluded_indexes": [4,5,6],
+          "probability": 1
+        }
+      },
+
+      "filters": [
+        "filters.cropper.Cropper", 
+        "filters.color.Color", 
+        "filters.zoom.Zoom"
+      ],
+
+      "logs": {
+        "log_directory": "./logs", 
+        "summary_step": 3500
+      },
+
+      "optimizer": {
+        "initial_learning_rate": 1.0e-4,
+        "steps": [0.4e6,0.6e6,0.8e6,1.0e6],  
+      }
+  },
+
   "testing":
   {
     "checkpoint_paths": {
