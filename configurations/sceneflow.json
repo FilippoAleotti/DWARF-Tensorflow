@@ -36,7 +36,7 @@
       
       "dataloader":{
         "data_paths": {
-          "flying3d": "/your/path/to/FlyingThings3D/train},
+          "flying3d": "/your/path/to/FlyingThings3D/train"},
 
         "selected_data_path": "flying3d",
         "batch_size": 4, 
