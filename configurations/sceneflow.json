@@ -32,7 +32,7 @@
         "prev_ckpt": "/previous/ckpt",
       },
 
-      "selected_checkpoint": none,
+      "selected_checkpoint": null,
       
       "dataloader":{
         "data_paths": {
